@@ -18,6 +18,8 @@ public class Order : Entity
 
     public IReadOnlyList<LineItem> LineItems => _lineItems.ToList();
 
+    public bool IsCancelled { get; private set; }
+
     public static Order Create(CustomerId customerId)
     {
         var order = new Order
@@ -64,4 +66,6 @@ public class Order : Entity
     }
 
     private bool HasOneLineItem() => _lineItems.Count == 1;
+
+    public void Cancel() => IsCancelled = true;
 }
