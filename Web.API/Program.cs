@@ -1,4 +1,5 @@
 using Application;
+using Application.Abstractions;
 using Application.Orders.Create.Saga;
 using Carter;
 using Infrastructure;
@@ -6,6 +7,7 @@ using Persistence;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
 using Web.API.Extensions;
+using Web.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddCarter();
+
+builder.Services.AddScoped<ILinkService, LinkService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddRebus(rebus => rebus
         .Routing(r =>
