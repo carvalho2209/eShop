@@ -8,6 +8,7 @@ using Persistence;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
 using Web.API.Extensions;
+using Web.API.Middleware;
 using Web.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -73,6 +74,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRateLimiter();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapCarter();
 

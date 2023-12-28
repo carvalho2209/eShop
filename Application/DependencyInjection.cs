@@ -15,6 +15,8 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(UnitOfWorkBehavior<,>));
 
             config.AddOpenBehavior(typeof(IdempotentCommandPipelineBehavior<,>));
+
+            config.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(ApplicationAssemblyReference.Assembly);

@@ -8,9 +8,9 @@ using Domain.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.API.Endpoints.Order;
+namespace Web.API.Endpoints.Orders;
 
-public class Create : ICarterModule
+public class Orders : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

@@ -8,7 +8,7 @@ using Domain.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.API.Endpoints;
+namespace Web.API.Endpoints.Products;
 
 public class Products : ICarterModule
 {
