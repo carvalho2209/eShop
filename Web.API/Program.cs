@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using Application;
 using Application.Abstractions;
 using Application.Orders.Create.Saga;
@@ -21,6 +22,20 @@ builder.Services.AddCarter();
 
 builder.Services.AddScoped<ILinkService, LinkService>();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    
+    options.AddPolicy("fixed", context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString(),
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 10,
+                Window = TimeSpan.FromSeconds(10)
+            }));
+});
 
 builder.Services.AddRebus(rebus => rebus
         .Routing(r =>
