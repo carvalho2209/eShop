@@ -1,4 +1,5 @@
-﻿using Application.Data;
+﻿using Application.Abstractions.Idempotency;
+using Application.Data;
 using Application.Orders;
 using Application.Orders.Create;
 using Application.Orders.GetOrderSummary;
@@ -8,6 +9,7 @@ using Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Idempotency;
 using Persistence.Repositories;
 using Persistence.Services;
 
@@ -43,6 +45,8 @@ public static class DependencyInjection
         services.AddScoped<IGetOrderSummary, GetOrderSummary>();
 
         services.AddScoped<ICalculateOrderSummary, CalculateOrderSummary>();
+
+        services.AddScoped<IIdempotencyService, IdempotencyService>();
 
         return services;
     }
