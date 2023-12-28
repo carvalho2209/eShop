@@ -1,5 +1,4 @@
-﻿using Application.Behaviors.Messaging;
-using MediatR;
+﻿using Application.Abstractions.Behaviors.Messaging;
 
 namespace Application.Customers.Create;
 

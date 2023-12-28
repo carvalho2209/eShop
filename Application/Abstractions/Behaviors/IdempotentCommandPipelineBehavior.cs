@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Idempotency;
 using MediatR;
 
-namespace Application.Behaviors;
+namespace Application.Abstractions.Behaviors;
 
 internal sealed class IdempotentCommandPipelineBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
