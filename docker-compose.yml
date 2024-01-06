@@ -33,3 +33,12 @@ services:
     environment:
         RABBITMQ_DEFAULT_USER: guest
         RABBITMQ_DEFAULT_PASS: guest
+
+  eshop.seq:
+    image: datalust/seq:latest
+    container_name: eshop-seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80

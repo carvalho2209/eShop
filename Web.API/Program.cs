@@ -7,6 +7,7 @@ using Infrastructure;
 using Persistence;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
+using Serilog;
 using Web.API.Extensions;
 using Web.API.Middleware;
 using Web.API.Services;
@@ -15,6 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseSerilog((context, loggerConfig) =>
+    loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
@@ -78,5 +82,7 @@ app.UseRateLimiter();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapCarter();
+
+app.UseSerilogRequestLogging();
 
 app.Run();
